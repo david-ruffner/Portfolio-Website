@@ -1,0 +1,127 @@
+@media only screen and (min-width: 1500px) and (max-width: 1800px) {
+    #nav_container {
+        grid-template-columns: 45% 52% 3%;
+    }
+}
+
+@media only screen and (min-width: 1201px) and (max-width: 1499px) {
+    #nav_container {
+        grid-template-columns: 35% 62% 3%;
+    }
+
+    #nav_button_container {
+        grid-template-columns: auto 20% 5% 20% auto;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    #main_container {
+        grid-template-rows: 10% 65% 25%;
+    }
+
+    #title_container {
+        margin-bottom: 0px;
+    }
+
+    #nav_container {
+        display: none;
+    }
+
+    #mobile_nav_background {
+        display: block;
+    }
+
+    #hamburger_icon {
+        display: block;
+        width: 100px;
+        justify-self: right;
+        margin-right: 25px;
+        margin-top: 25px;
+    }
+    
+    /* #nav_container {
+        grid-template-columns: auto;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+        border-radius: 5px;
+        background: inherit;
+        overflow: hidden;
+    } */
+
+    #nav_links {
+        display: block;
+        grid-column: 1;
+    }
+    
+    #nav_button_container {
+        grid-template-columns: auto 35% 5% 35% auto;
+    }
+    
+    #icon_container {
+        grid-template-rows: repeat(9, auto);
+        grid-template-columns: auto;
+        justify-items: center;
+    }
+
+    #icon_container > img:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    #front_end_title {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    #front_end_paragraph {
+        grid-column: 1;
+        grid-row: 3;
+    }
+    
+    #icon_container > img:nth-child(2) {
+        grid-column: 1;
+        grid-row: 4;
+    }
+
+    #back_end_title {
+        grid-column: 1;
+        grid-row: 5;
+    }
+
+    #back_end_paragraph {
+        grid-column: 1;
+        grid-row: 6;
+    }
+    
+    #icon_container > img:nth-child(3) {
+        grid-column: 1;
+        grid-row: 7;
+    }
+
+    #business_title {
+        grid-column: 1;
+        grid-row: 8;
+    }
+
+    #business_paragraph {
+        grid-column: 1;
+        grid-row: 9;
+    }
+
+    #article_container {
+        width: 100%;
+        grid-template-columns: auto;
+    }
+
+    #description_container {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    #languages_container {
+        grid-column: 1;
+        grid-row: 1;
+    }
+}

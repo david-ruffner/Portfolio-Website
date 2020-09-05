@@ -9,18 +9,30 @@
         <meta name="author" content="David Ruffner">
 
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/media_queries.css">
     </head>
 
     <body>
-
+        <div id="mobile_nav_container">
+            <img id="expanded_hamburger_icon" src="./resources/images/hamburger_icon_white.png" />
+            <a class="nav_link_active" href="#">About</a>
+            <a class="nav_link_inactive" href="#">Resume</a>
+            <a class="nav_link_inactive" href="#">GitHub</a>
+            <a class="nav_link_inactive" href="#">Projects</a>
+            <a class="nav_link_inactive" href="#">LinkedIn</a>
+            <a class="nav_link_inactive" href="#">Contact Me</a>
+        </div>
         <div id="main_container">
+            <img id="hamburger_icon" src="./resources/images/hamburger_icon_white.png" />
             <div id='nav_container'>
-                <a class="nav_link_active" href="#">About</a>
-                <a class="nav_link_inactive" href="#">Resume</a>
-                <a class="nav_link_inactive" href="#">GitHub</a>
-                <a class="nav_link_inactive" href="#">Projects</a>
-                <a class="nav_link_inactive" href="#">LinkedIn</a>
-                <a class="nav_link_inactive" href="#">Contact Me</a>
+                <div id="nav_links">
+                    <a class="nav_link_active" href="#">About</a>
+                    <a class="nav_link_inactive" href="#">Resume</a>
+                    <a class="nav_link_inactive" href="#">GitHub</a>
+                    <a class="nav_link_inactive" href="#">Projects</a>
+                    <a class="nav_link_inactive" href="#">LinkedIn</a>
+                    <a class="nav_link_inactive" href="#">Contact Me</a>
+                </div>
             </div>
             <div id="title_container">
                 <p>HI, I'M DAVID RUFFNER.<br/>I AM A FULL STACK WEB<br/>DEVELOPER.</p>
