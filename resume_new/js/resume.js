@@ -297,94 +297,116 @@ function add_certificate_history(certificates) {
 var resp;
 
 $(document).ready(function() {
+    // Fade in each contact container class
+    $(".contact_container").each(function() {
+        $(this).animate({opacity: 1}, 400);
+    })
+
+    // Animate the progress bars
+    $("progress").each(function() {
+        $(this).animate({value: $(this).attr("skill-value")}, 250);
+    })
+
     // $(".card").each(function(index) {
     //     $(this).delay(50 * index).animate({left: 0, opacity: 1}, 250);
     // })
     // get_employers();
 
-    $.ajax({
-        url: "https://api.davidr.pro/virtualresume/get",
-        success: function(response) {
-            resp = JSON.parse(response);
-            resp = resp.message;
+    // $.ajax({
+    //     url: "https://api.davidr.pro/virtualresume/get",
+    //     success: function(response) {
+    //         resp = JSON.parse(response);
+    //         resp = resp.message;
 
-            // Add the contact info
-            var contact_info = resp.find((elem) => {
-                return elem.document_name == "contact_info"
-            })
-            add_contact_info(contact_info);
+    //         // Add the contact info
+    //         var contact_info = resp.find((elem) => {
+    //             return elem.document_name == "contact_info"
+    //         })
+    //         add_contact_info(contact_info);
 
-            // Slide in the contact container background, and then fade in the elements
-            $("#contact_info_container").animate({right: 0}, 300, function() {
-                $(".contact_container").animate({opacity: 1}, 300);
-            })
+    //         // Slide in the contact container background, and then fade in the elements
+    //         $("#contact_info_container").animate({right: 0}, 300, function() {
+    //             $(".contact_container").animate({opacity: 1}, 300);
+    //         })
 
-            // Add the language skills
-            var languages = resp.find((elem) => {
-                return elem.document_name == "languages";
-            }).languages;
-            add_language_skills(languages);
+    //         // Add the language skills
+    //         var languages = resp.find((elem) => {
+    //             return elem.document_name == "languages";
+    //         }).languages;
+    //         add_language_skills(languages);
 
-            // Add the professional skills
-            var professional_skills = resp.find((elem) => {
-                return elem.document_name == "professional_skills";
-            }).skills;
-            add_professional_skills(professional_skills);
+    //         // Add the professional skills
+    //         var professional_skills = resp.find((elem) => {
+    //             return elem.document_name == "professional_skills";
+    //         }).skills;
+    //         add_professional_skills(professional_skills);
 
-            // Add the personal skills
-            var personal_skills = resp.find((elem) => {
-                return elem.document_name == "personal_skills";
-            }).skills;
-            add_personal_skills(personal_skills);
+    //         // Add the personal skills
+    //         var personal_skills = resp.find((elem) => {
+    //             return elem.document_name == "personal_skills";
+    //         }).skills;
+    //         add_personal_skills(personal_skills);
 
-            // Add the employment history
-            var employment_history = resp.find((elem) => {
-                return elem.document_name == "employment_history";
-            }).employers;
-            add_employment_history(employment_history);
+    //         // Add the employment history
+    //         var employment_history = resp.find((elem) => {
+    //             return elem.document_name == "employment_history";
+    //         }).employers;
+    //         add_employment_history(employment_history);
 
-            // Add the education history
-            var education_history = resp.find((elem) => {
-                return elem.document_name == "education_history"
-            }).education;
-            add_education_history(education_history);
+    //         // Add the education history
+    //         var education_history = resp.find((elem) => {
+    //             return elem.document_name == "education_history"
+    //         }).education;
+    //         add_education_history(education_history);
 
-            // Add the certification history
-            var certificate_history = resp.find((elem) => {
-                return elem.document_name == "certificate_history"
-            }).certificates;
-            add_certificate_history(certificate_history);
+    //         // Add the certification history
+    //         var certificate_history = resp.find((elem) => {
+    //             return elem.document_name == "certificate_history"
+    //         }).certificates;
+    //         add_certificate_history(certificate_history);
 
-            // Slide in the cards
-            $("#languages_card").animate({right: 0}, 300, function() {
-                // Animate the skill meters
-                $("#languages_card > .skill_meter > .skill_meter_foreground").each(function(index) {
-                    // Get the custom skill level property and ensure it's an int
-                    let skill_level = parseInt($(this).parent().attr("skill-level"));
-                    // skill_level *= 0.9;
-                    skill_level = skill_level + "%";
-                    console.log(skill_level);
+    //         // Slide in the cards
+    //         $("#languages_card").animate({right: 0}, 300, function() {
+    //             // Animate the skill meters
+    //             $("#languages_card > .skill_meter > .skill_meter_foreground").each(function(index) {
+    //                 // Get the custom skill level property and ensure it's an int
+    //                 let skill_level = parseInt($(this).parent().attr("skill-level"));
+    //                 // skill_level *= 0.9;
+    //                 skill_level = skill_level + "%";
+    //                 console.log(skill_level);
             
-                    $(this).delay(50 * index).animate({width: skill_level}, 500)
-                })
-            });
+    //                 $(this).delay(50 * index).animate({width: skill_level}, 500)
+    //             })
+    //         });
 
-            $("#professional_skills_card").animate({left: 0}, 300, function() {
-                // Animate the skill meters
-                $("#professional_skills_card > .skill_meter > .skill_meter_foreground").each(function(index) {
-                    // Get the custom skill level property and ensure it's an int
-                    let skill_level = parseInt($(this).parent().attr("skill-level"));
-                    // skill_level *= 0.9;
-                    skill_level = skill_level + "%";
-                    console.log(skill_level);
+    //         $("#professional_skills_card").animate({left: 0}, 300, function() {
+    //             // Animate the skill meters
+    //             $("#professional_skills_card > .skill_meter > .skill_meter_foreground").each(function(index) {
+    //                 // Get the custom skill level property and ensure it's an int
+    //                 let skill_level = parseInt($(this).parent().attr("skill-level"));
+    //                 // skill_level *= 0.9;
+    //                 skill_level = skill_level + "%";
+    //                 console.log(skill_level);
             
-                    $(this).delay(50 * index).animate({width: skill_level}, 500)
-                })
-            });
-        },
-        error: function(error) {
-            //TODO: Handle this
-        }
+    //                 $(this).delay(50 * index).animate({width: skill_level}, 500)
+    //             })
+    //         });
+    //     },
+    //     error: function(error) {
+    //         //TODO: Handle this
+    //     }
+    // })
+})
+
+// When a skill progress bar is hovered over, show its corresponding tooltip
+$(".skill_progress_bar").mouseover(function() {
+    $(this).next(".skill_tooltip").animate({opacity: 1}, 250);
+})
+
+// Hide that same tooltip on mouse leave
+$(".skill_progress_bar").mouseleave(function() {
+    $(this).next(".skill_tooltip").animate({opacity: 0}, 250, function() {
+        // $(this).css("display", "none");
     })
 })
 
