@@ -296,6 +296,26 @@ function add_certificate_history(certificates) {
 // Global var to hold the resume API response
 var resp;
 
+// Keeps track of the current resume view (default is all)
+var current_resume_view_id = "all_resume_view_switch";
+
+// When an inactive resume view switch button is clicked
+$(document).on("click", ".resume_inactive_switch", function() {
+    // Remove the active class from the current active resume view switch
+    $(`#${current_resume_view_id}`).removeClass("resume_active_switch").addClass("resume_inactive_switch").children(".resume_switch_overlay").css("width", "0px");
+    // This will select the given old switch's corresponding header, and change its color
+    $(`#${current_resume_view_id.replace("switch", "header")}`).removeClass("resume_switch_active_header").addClass("resume_switch_inactive_header");
+
+    current_resume_view_id = $(this).attr("id");
+    // Select the given new switch's corresponding header, and change its color
+    $(`#${current_resume_view_id.replace("switch", "header")}`).removeClass("resume_switch_inactive_header").addClass("resume_switch_active_header");
+    
+    // Animation for the new active view switch
+    $(this).children(".resume_switch_overlay").animate({width: "150px"}, 250, function() {
+        $(this).parent().removeClass("resume_inactive_switch").addClass("resume_active_switch");
+    });
+})
+
 $(document).ready(function() {
     // Fade in each contact container class
     $(".contact_container").each(function() {
@@ -571,11 +591,11 @@ function certificate_history_container_inview() {
 }
 
 $(window).on('scroll', function() {
-    personal_skills_inview();
-    employment_history_header_inview();
-    employment_history_container_inview();
-    education_history_header_inview();
-    education_history_container_inview();
-    certificate_history_header_container_inview();
-    certificate_history_container_inview();
+    // personal_skills_inview();
+    // employment_history_header_inview();
+    // employment_history_container_inview();
+    // education_history_header_inview();
+    // education_history_container_inview();
+    // certificate_history_header_container_inview();
+    // certificate_history_container_inview();
 });
