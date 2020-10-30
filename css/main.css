@@ -160,7 +160,8 @@ body {
     grid-template-columns: auto 15% 5% 15% auto;
 }
 
-#nav_button_container > button {
+#nav_button_container > a {
+    text-decoration: none;
     background-color: var(--web-blue);
     font-family: bebas;
     font-size: 24pt;
@@ -176,7 +177,7 @@ body {
     border: 1px solid transparent;
 }
 
-#nav_button_container > button:hover {
+#nav_button_container > a:hover {
     cursor: pointer;
     color: var(--web-blue);
     background-color: white;

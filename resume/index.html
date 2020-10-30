@@ -7,9 +7,12 @@
         <title>David Ruffner</title>
         <meta name="description" content="David Ruffner, Software Developer.">
         <meta name="author" content="David Ruffner">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="css/resume.css">
-        <link rel="stylesheet" href="css/resume_media_queries.css">
+        <link rel="stylesheet" href="../css/common.css">
+        <link rel="stylesheet" href="../css/navbar.css">
+        <link rel="stylesheet" href="../css/resume.css">
+        <link rel="stylesheet" href="../css/resume_media_queries.css">
     </head>
 
     <body>
@@ -24,12 +27,12 @@
         </div> -->
         <!-- <img id="hamburger_icon" src="./resources/images/hamburger_icon_white.png" /> -->
         <div id='nav_container'>
+            <a id="nav_home_link" href="https://davidr.pro">davidr.pro</a>
             <div id="nav_links">
-                <a class="nav_link_inactive" href="#">About</a>
-                <a class="nav_link_active" href="#">Resume</a>
-                <a class="nav_link_inactive" href="#">GitHub</a>
-                <a class="nav_link_inactive" href="#">Projects</a>
-                <a class="nav_link_inactive" href="#">LinkedIn</a>
+                <a class="nav_link_active" href="https://davidr.pro">About</a>
+                <a class="nav_link_inactive" href="https://davidr.pro/resume">Resume</a>
+                <a class="nav_link_inactive" href="https://github.com/david-ruffner" target="_blank">GitHub</a>
+                <a class="nav_link_inactive" href="https://www.linkedin.com/in/david-ruffner/" target="_blank">LinkedIn</a>
                 <a class="nav_link_inactive" href="#">Contact Me</a>
             </div>
         </div>
@@ -40,21 +43,491 @@
             <hr/>
         </div>
 
-        <div id="resume_sort_container">
-            <h1>VIRTUAL RESUME</h1>
-            <p>Select By: </p>
-            <select id="resume_sort_select">
-                <option value="employement_history">Employment History</option>
-                <option value="projects">Projects</option>
-            </select>
-            <hr />
+        <div id="contact_info_container">
+            <div class="contact_container">
+                <img src="../resources/images/github.png" width="100"/>
+                <a href="https://github.com/david-ruffner" target="_blank">GitHub</a>
+            </div>
+            <div class="contact_container">
+                <img src="../resources/images/linkedin.png" width="100"/>
+                <a href="https://www.linkedin.com/in/david-ruffner/" target="_blank">LinkedIn</a>
+            </div>
+            <div class="contact_container">
+                <img src="../resources/images/envelope.png" width="125"/>
+                <a href="mailto:david@davidr.pro">david@davidr.pro</a>
+            </div>
+            <div class="contact_container">
+                <img src="../resources/images/phone.png" width="100"/>
+                <a href="tel:2489154589">(248) 915-4589</a>
+            </div>
         </div>
 
-        <div id="employment_resume_container"></div>
+        <div id="resume_view_switch_container">
+            <h2 class="resume_switch_header resume_switch_active_header" id="all_resume_view_header">All</h2>
+            <h2 class="resume_switch_header resume_switch_inactive_header" id="skills_resume_view_header">Skills</h2>
+            <h2 class="resume_switch_header resume_switch_inactive_header" id="employment_resume_view_header">Employment</h2>
+            <h2 class="resume_switch_header resume_switch_inactive_header" id="education_resume_view_header">Education</h2>
+            <h2 class="resume_switch_header resume_switch_inactive_header" id="projects_resume_view_header">Projects</h2>
 
-        <div id="education_resume_container">
-            
+            <div class="resume_switch resume_active_switch" id="all_resume_view_switch">
+                <hr class="resume_switch_underlay">
+                <hr class="resume_switch_overlay">
+            </div>
+            <div class="resume_switch resume_inactive_switch" id="skills_resume_view_switch">
+                <hr class="resume_switch_underlay">
+                <hr class="resume_switch_overlay">
+            </div>
+            <div class="resume_switch resume_inactive_switch" id="employment_resume_view_switch">
+                <hr class="resume_switch_underlay">
+                <hr class="resume_switch_overlay">
+            </div>
+            <div class="resume_switch resume_inactive_switch" id="education_resume_view_switch">
+                <hr class="resume_switch_underlay">
+                <hr class="resume_switch_overlay">
+            </div>
+            <div class="resume_switch resume_inactive_switch" id="projects_resume_view_switch">
+                <hr class="resume_switch_underlay">
+                <hr class="resume_switch_overlay">
+            </div>
+            <!-- <hr class="resume_switch resume_inactive_switch">
+            <hr class="resume_switch resume_inactive_switch">
+            <hr class="resume_switch resume_inactive_switch"> -->
         </div>
+
+        <div id="resume_container">
+            <div id="skill_cards_container">
+                <div class="cards_container_header_blue">
+                    <h1>Skills</h1>
+                </div>
+                <div class="skill_card">
+                    <div class="skill_card_header">
+                        <img src="../resources/images/profile_head.png" width="50"/>
+                        <h1>Languages</h1>
+                        <hr>
+                    </div>
+                    <div class="skill_card_content">
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">HTML/CSS/JavaScript/jQuery</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="85" value="0" max="100">85%</progress>
+                            <span class="skill_tooltip">8.5/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">HTML/CSS/JavaScript/jQuery</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="85" value="0" max="100">85%</progress>
+                            <span class="skill_tooltip">8.5/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">NodeJS</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="75" value="0" max="100">85%</progress>
+                            <span class="skill_tooltip">7.5/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">Python</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="70" value="0" max="100">85%</progress>
+                            <span class="skill_tooltip">7/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">PHP</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="65" value="0" max="100">85%</progress>
+                            <span class="skill_tooltip">6.5/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">MySQL/SQLite</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="60" value="0" max="100">85%</progress>
+                            <span class="skill_tooltip">6/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">MongoDB</h2>
+                            <progress class="skill_progress_bar orange_skill_progress_bar" skill-value="60" value="0" max="100">85%</progress>
+                            <span class="skill_tooltip">6/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">C#</h2>
+                            <progress class="skill_progress_bar orange_skill_progress_bar" skill-value="55" value="0" max="100">85%</progress>
+                            <span class="skill_tooltip">5.5/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">C</h2>
+                            <progress class="skill_progress_bar orange_skill_progress_bar" skill-value="50" value="0" max="100">85%</progress>
+                            <span class="skill_tooltip">5/10</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill_card">
+                    <div class="skill_card_header">
+                        <img src="../resources/images/briefcase.png" width="50"/>
+                        <h1>Professional Skills</h1>
+                        <hr>
+                    </div>
+                    <div class="skill_card_content">
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">Software Development</h2>
+                            <progress class="skill_progress_bar orange_skill_progress_bar" skill-value="90" value="0" max="100"></progress>
+                            <span class="skill_tooltip">9/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">TCP/IP Networks</h2>
+                            <progress class="skill_progress_bar orange_skill_progress_bar" skill-value="70" value="0" max="100"></progress>
+                            <span class="skill_tooltip">7/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">Apache and Nginx</h2>
+                            <progress class="skill_progress_bar orange_skill_progress_bar" skill-value="60" value="0" max="100"></progress>
+                            <span class="skill_tooltip">6/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">Hardware</h2>
+                            <progress class="skill_progress_bar orange_skill_progress_bar" skill-value="60" value="0" max="100"></progress>
+                            <span class="skill_tooltip">6/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">Light Linux Sysadmin</h2>
+                            <progress class="skill_progress_bar orange_skill_progress_bar" skill-value="50" value="0" max="100"></progress>
+                            <span class="skill_tooltip">5/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">Photoshop</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="50" value="0" max="100"></progress>
+                            <span class="skill_tooltip">5/10</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill_card">
+                    <div class="skill_card_header">
+                        <img src="../resources/images/profile_head.png" width="50"/>
+                        <h1>Personal Skills</h1>
+                        <hr>
+                    </div>
+                    <div class="skill_card_content">
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">Communication/Soft Skills</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="90" value="0" max="100"></progress>
+                            <span class="skill_tooltip">9/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">Team Player</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="80" value="0" max="100"></progress>
+                            <span class="skill_tooltip">8/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">Creative</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="70" value="0" max="100"></progress>
+                            <span class="skill_tooltip">7/10</span>
+                        </div>
+                        <div class="skill_data_container">
+                            <h2 class="skill_header">Detail Oriented</h2>
+                            <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="70" value="0" max="100"></progress>
+                            <span class="skill_tooltip">7/10</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="skill_card" id="languages_skill_card">
+                    <h1>Languages</h1>
+                    
+                </div>
+                <div class="skill_card" id="professional_skill_card">
+                    <h1>Professional Skills</h1>
+                    <div class="skill_data_container">
+                        <h2 class="skill_header">C</h2>
+                        <progress class="skill_progress_bar blue_skill_progress_bar" skill-value="50" value="0" max="100">85%</progress>
+                        <span class="skill_tooltip">5/10</span>
+                    </div>
+                </div>
+                <div class="skill_card" id="personal_skill_card">
+                    <h1>Personal Skills</h1>
+                    <h2 class="skill_header">${language.language_name}</h2>
+                </div> -->
+            </div>
+    
+            <div id="employment_cards_container">
+                <div class="cards_container_header_blue">
+                    <h1>Employment</h1>
+                </div>
+                <div class="employment_card">
+                    <img src="../resources/images/mw_logo.png" width="100"/>
+                    <h1>Software Developer at ManagedWay Company, Troy, MI</h1>
+                    <h2>September 2019 - Current</h2>
+                    <ul>
+                        <li>
+                            <p class="employment_card_description">
+                                Designed, created, and deployed a single pane of glass dashboard for our DDoS mitigation service customers. The application used JWT tokens as part of its rigorous authentication process. Additionally, it interacted with an ELK (Elasticsearch, Logstash, Kibana) cluster to pull data about how the service was working for them. A modern mobile-first UI and interactive graphs displayed the customer's data, and they also could print and download these reports as PDF files.
+                            </p>
+                        </li>
+                        <li>
+                            <p class="employment_card_description">
+                                Designed, created, deployed, and supported a mobile-first web application that could store our partner carriers' serviceable addresses. The program could import Excel files ranging from 5 MB to 250+ MB in size. I wrote the file import module in C to ensure the fastest processing of files. The addresses were stored and sorted by partner carrier in a central database and then made searchable via a PHP (later updated to NodeJS) back-end.
+                            </p>
+                        </li>
+                        <li>
+                            <p class="employment_card_description">
+                                Designed, created, deployed, and supported a mobile-first single pane of glass application to store and make searchable all company info about customers, services, physical inventory, and more. The back-end used a relational MySQL database to store this data and the relationships between it.
+                            </p>
+                        </li>
+                    </ul>
+                    <div class="employment_card_overlay">
+                        <h1>Click For More Info</h1>
+                    </div>
+                </div>
+                <div class="employment_card">
+                    <img src="../resources/images/obs_logo.png" width="150"/>
+                    <h1>IT Technician at Out of the Box Solutions, St. Clair Shores, MI</h1>
+                    <h2>May 2018 - September 2019</h2>
+                    <ul>
+                        <li>
+                            <p class="employment_card_description">
+                                Designed, created, and deployed a single pane of glass dashboard for our DDoS mitigation service customers. The application used JWT tokens as part of its rigorous authentication process. Additionally, it interacted with an ELK (Elasticsearch, Logstash, Kibana) cluster to pull data about how the service was working for them. A modern mobile-first UI and interactive graphs displayed the customer's data, and they also could print and download these reports as PDF files.
+                            </p>
+                        </li>
+                        <li>
+                            <p class="employment_card_description">
+                                Designed, created, deployed, and supported a mobile-first web application that could store our partner carriers' serviceable addresses. The program could import Excel files ranging from 5 MB to 250+ MB in size. I wrote the file import module in C to ensure the fastest processing of files. The addresses were stored and sorted by partner carrier in a central database and then made searchable via a PHP (later updated to NodeJS) back-end.
+                            </p>
+                        </li>
+                        <li>
+                            <p class="employment_card_description">
+                                Designed, created, deployed, and supported a mobile-first single pane of glass application to store and make searchable all company info about customers, services, physical inventory, and more. The back-end used a relational MySQL database to store this data and the relationships between it.
+                            </p>
+                        </li>
+                    </ul>
+                    <div class="employment_card_overlay">
+                        <h1>Click For More Info</h1>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="education_cards_container">
+                <div class="cards_container_header_orange">
+                    <h1>Education</h1>
+                </div>
+                <div class="education_card">
+                    <img src="../resources/images/walsh_college_logo.png" width="150" />
+                    <h1>Bachelor Degree of Information Technology</h1>
+                    <h2>Major: Business Information Systems</h2>
+                    <h3>September 2016 - June 2019</h3>
+                    <!-- <ul>
+                        <li>
+                            <p class="education_card_description">
+                                This is a test
+                            </p>
+                        </li>
+                    </ul> -->
+                </div>
+                <div class="education_card">
+                    <img src="../resources/images/mcc_logo.png" width="250" />
+                    <h1>Associate Degree</h1>
+                    <h2>Major: General Studies</h2>
+                    <h3>January 2011 - December 2014</h3>
+                    <!-- <ul>
+                        <li>
+                            <p class="education_card_description">
+                                This is a test
+                            </p>
+                        </li>
+                    </ul> -->
+                </div>
+            </div>
+
+            <div id="project_cards_container">
+                <div class="cards_container_header_blue">
+                    <h1>Projects</h1>
+                </div>
+                <div class="project_card">
+                    <h1>Set Buddy - In Progress</h1>
+                    <a href="https://github.com/david-ruffner/setbuddy" target="_blank">https://github.com/david-ruffner/setbuddy</a>
+                    <h2>Purpose</h2>
+                    <p>This will be a fully featured web application designed for musicians who need to keep track of everything that they are
+                        practicing. The user will be able to keep track of the theory, scales, songs, and other assignments that they are practicing. An
+                        intelligent algorithm will allow for automatic generation of practice sets based on several factors including how important the
+                        a given song is, how well the user has been doing on the song, and how long they want a practice set to take. These sets can
+                        be manually adjusted, saved, printed off, and emailed as PDF files. The program will be cloud based, and will require the user
+                        to sign up with a valid e-mail address. All of their data will be stored in a cloud. There will also be an Android (and potentially
+                        an iOS) app that will include all of the features of the web app as well as extra utilities like a metronome.
+                    </p>
+                    <h2>Main Features</h2>
+                    <ul>
+                        <li>Cloud based application that will automatically store user data.</li>
+                        <li> User will be able to keep track of their theory, scales, songs, and any other assignments.</li>
+                        <li>User will be able to keep track of how well they are doing on assignments over time, and this factor will play into the
+                            algorithm that creates automatic practice set lists.</li>
+                        <li>Android (and possibly an iOS) app will include all of the above features as well as extra utilities such as a metronome.</li>
+                        <li>A modern and scalable design so that the web-app can be used effectively on any sized device.</li>
+                    </ul>
+                    <h2>Languages</h2>
+                    <ul>
+                        <li>HTML/CSS/JavaScript/jQuery for the web app’s front-end.</li>
+                        <li>The back-end will use a MySQL database to store the user data, and will use NodeJS to create REST API for interacting
+                            with the data. This will allow both the web app and the Android/iOS app to use one unified API for accessing user data.</li>
+                        <li>Kotlin to create the Android app.</li>
+                        <li>Swift to create the iOS app.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="email_resume_background">
+            <h1>Test</h1>
+        </div>
+
+        <!-- This is the modal that appears when an employment card is clicked on -->
+        <div id="more_info_background">
+            <div id="more_info_card">
+                <div id="more_info_card_header">
+                    <img draggable="false" id="more_info_header_icon" src="../resources/images/info_logo.png" width="50" />
+                    <h1>More Info - ManagedWay</h1>
+                    <img draggable="false" id="more_info_header_close" src="../resources/images/white_close_x.png" width="27" />
+                    <img draggable="false" id="more_info_header_close_overlay" src="../resources/images/orange_close_x.png" width="27" />
+                </div>
+                <div id="more_info_view_select_container">
+                    <div class="more_info_view_button more_info_active_view_button" id="more_info_contact_button">
+                        <h2>Contact Info</h2>
+                        <div class="more_info_view_button_header"></div>
+                        <div class="more_info_view_button_header_overlay" style="width: 100%;"></div>
+                    </div>
+                    <div class="more_info_view_button" id="more_info_projects_button">
+                        <h2>All Projects</h2>
+                        <div class="more_info_view_button_header"></div>
+                        <div class="more_info_view_button_header_overlay"></div>
+                    </div>
+                </div>
+                <div id="more_info_contact_view_container">
+                    <table class="more_info_contact_table" id="more_info_building_contact_table">      
+                        <tr>
+                            <th>Main Phone</th>
+                            <th>Address</th>
+                            <!-- <th>Manager's Name</th>
+                            <th>Manager's Email</th>
+                            <th>Manager's Phone</th> -->
+                        </tr>
+                        <tr>
+                            <td>(888) 745-6948</td>
+                            <td>600 Executive Dr, Troy, MI 48083</td>
+                            <!-- <td>Chris Eckelsdafer</td>
+                            <td>ceckelsd@managedway.com</td>
+                            <td>(888) 745-6948 x225 fdjak;fdajskf;dsajkfd;asjfkdas;</td> -->
+                        </tr>
+                    </table>
+
+                    <table class="more_info_contact_table" id="more_info_boss_contact_table">      
+                        <tr>
+                            <th>Manager's Name</th>
+                            <th>Manager's Email</th>
+                            <th>Manager's Phone</th>
+                        </tr>
+                        <tr>
+                            <td>Chris Eckelsdafer</td>
+                            <td>ceckelsd@managedway.com</td>
+                            <td>(888) 745-6948 x225</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="more_info_projects_view_container">
+                    <div id="more_info_projects_table">
+                        <h1>Project Name</h1>
+                        <h1>Project Description</h1>
+                        <h1>Languages/Skills Used</h1>
+                        <div class="more_info_projects_table_cell">
+                            <h2>ManagedDefender Dashboard</h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>
+                                Designed, created, and deployed a single pane of glass dashboard for our DDoS mitigation service customers. The application used JWT tokens as part of its rigorous authentication process. Additionally, it interacted with an ELK (Elasticsearch, Logstash, Kibana) cluster to pull data about how the service was working for them. A modern mobile-first UI and interactive graphs displayed the customer's data, and they also could print and download these reports as PDF files.
+                            </h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>HTML/CSS/JavaScript, jQuery, PHP, ELK Stack</h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>Service Qualification Software</h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>
+                                Designed, created, deployed, and supported a mobile-first web application that could store our partner carriers' serviceable addresses. The program could import Excel files ranging from 5 MB to 250+ MB in size. I wrote the file import module in C to ensure the fastest processing of files. The addresses were stored and sorted by partner carrier in a central database and then made searchable via a PHP (later updated to NodeJS) back-end.
+                            </h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>HTML/CSS/JavaScript, jQuery, PHP, C, SQLite, Apache</h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>Company Audit Software</h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>
+                                Designed, created, deployed, and supported a mobile-first single pane of glass application to store and make searchable all company info about customers, services, physical inventory, and more. The back-end used a relational MySQL database to store this data and the relationships between it.
+                            </h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>HTML/CSS/JavaScript, jQuery, NodeJS, MySQL, Nginx</h2>
+                        </div>
+                        <!-- <h2>Chris Eckelsdafer</h2>
+                        <h2>ceckelsd@managedway.com</h2>
+                        <h2>(888) 745-6948 x225</h2>
+                        <h2>Chris Eckelsdafer</h2>
+                        <h2>ceckelsd@managedway.com</h2>
+                        <h2>(888) 745-6948 x225</h2> -->
+                    </div> 
+                    <!-- <table class="more_info_contact_table" id="more_info_projects_table">
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Project Description</th>
+                            <th>Languages Used</th>
+                        </tr>
+                        <tr>
+                            <td>Chris Eckelsdafer</td>
+                            <td>ceckelsd@managedway.com This is a test to see how this handles long scentences</td>
+                            <td>(888) 745-6948 x225</td>
+                        </tr>
+                    </table> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="skill_cards_container">
+            <div class="skill_card" id="languages_card"> 
+                <div class="skill_card_header">
+                    <h1>Languages</h1>
+                    <div class="skill_meter" skill-level="8">
+                        <h2 class="skill_header">${language.language_name}</h2>
+                        <div class="skill_meter_background"></div>
+                        <div class="skill_meter_foreground" style="background-color: var(--web-blue)"></div>
+                        <div class="skill_tooltip">
+                        <p>${(language.familiarity_score / 10).toFixed(1)} / 10</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill_card" id="professional_skills_card">
+                <div class="skill_card_header">
+                    <h1>Professional Skills</h1>
+                </div>
+            </div>
+
+            <div class="skill_card" id="personal_skills_card">
+                <div class="skill_card_header">
+                    <h1>Personal Skills</h1>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <div id="employment_history_header_container">
+            <h1>Employment History</h1>
+            <hr>
+        </div>
+
+        <div id="employment_history_container"></div>
+
+        <div id="education_history_header_container">
+            <h1>Education History</h1>
+            <hr>
+        </div>
+
+        <div id="education_history_container"></div>
+
+        <div id="certificate_history_header_container">
+            <h1>Certificates</h1>
+            <hr>
+        </div>
+
+        <div id="certificate_history_container"></div> -->
         
         <!-- <div id="footer_container">
             <h1>COPYRIGHT DAVID RUFFNER 2020</h1>
@@ -64,6 +537,6 @@
         src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
-        <script src="js/resume.js"></script>
+        <script src="../js/resume.js"></script>
     </body>
 </html>
