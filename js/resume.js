@@ -487,13 +487,13 @@ $(document).on('mouseleave', '.skill_meter_background', function() {
 })
 
 // Handles hovering over an employment card (click for more info)
-$(document).on('mouseover', '.employment_card', function() {
-    $(this).find(".employment_card_overlay").animate({opacity: 1}, 200);
-})
+// $(document).on('mouseover', '.employment_card', function() {
+//     $(this).find(".employment_card_overlay").animate({opacity: 1}, 200);
+// })
 
-$(document).on('mouseleave', '.employment_card', function() {
-    $(this).find(".employment_card_overlay").animate({opacity: 0}, 200);
-})
+// $(document).on('mouseleave', '.employment_card', function() {
+//     $(this).find(".employment_card_overlay").animate({opacity: 0}, 200);
+// })
 
 // Handles hovering over an education card (click for more info)
 $(document).on('mouseover', '.education_card', function() {
@@ -639,3 +639,62 @@ $(window).on('scroll', function() {
     // certificate_history_header_container_inview();
     // certificate_history_container_inview();
 });
+
+function load_more_info_modal() {
+    
+}
+
+// When a view button is clicked in the more info modal
+$(".more_info_view_button").click(function() {
+    // For some reason the :not selector isn't working here, so we have to check if the clicked on button has an active class already. If it does, return.
+    if ($(this).hasClass("more_info_active_view_button")) {
+        return;
+    }
+
+    // Change the current active button to an inactive state
+    $(".more_info_active_view_button > .more_info_view_button_header_overlay").css("width", "0");
+    $(".more_info_active_view_button").removeClass("more_info_active_view_button");
+
+    // Change the clicked button to an active state
+    $(this).addClass("more_info_active_view_button");
+    $(this).children(".more_info_view_button_header_overlay").animate({width: "100%"}, 150);
+
+    // Transition the corresponding view
+    // Get the id of the button's corresponding view
+    let view_id = $(this).attr("id").replace(/button/gi, "view_container");
+    if (view_id === "more_info_projects_view_container") {
+        $("#more_info_contact_view_container").animate({right: "100vw"}, 350);
+        $("#more_info_projects_view_container").animate({left: 0}, 350);
+
+        // In the projects view mode, the parent more_info card needs to get a bit bigger
+        let parent_card = $(this).parent().parent();
+        parent_card.animate({
+            width: '1200px',
+            height: '80%'}, 350);
+    }
+    else {
+        $("#more_info_projects_view_container").animate({left: "100vw"}, 350);
+        $("#more_info_contact_view_container").animate({right: 0}, 350);
+
+        // In the contact info view mode, the parent more_info card will become smaller
+        let parent_card = $(this).parent().parent();
+        parent_card.animate({
+            width: '1000px',
+            height: '525px'}, 350);
+    }
+})
+
+// When the more info close button is clicked, close the modal
+$("#more_info_header_close_overlay").click(function() {
+    $("#more_info_background").animate({opacity: 0}, 250, function() {
+        $("#more_info_background").css("display", "none");
+        $("#more_info_card").css("bottom", "100vh");
+    })
+})
+
+// When an employment card overlay is clicked, show the more info modal with the appropriate info
+$(".employment_card_overlay").click(function() {
+    // Fade in the modal
+    $("#more_info_background").css("display", "grid").animate({opacity: 1}, 250);
+    $("#more_info_card").animate({bottom: 0}, 250);
+})

@@ -264,6 +264,9 @@
                             </p>
                         </li>
                     </ul>
+                    <div class="employment_card_overlay">
+                        <h1>Click For More Info</h1>
+                    </div>
                 </div>
                 <div class="employment_card">
                     <img src="../resources/images/obs_logo.png" width="150"/>
@@ -286,6 +289,9 @@
                             </p>
                         </li>
                     </ul>
+                    <div class="employment_card_overlay">
+                        <h1>Click For More Info</h1>
+                    </div>
                 </div>
             </div>
     
@@ -360,6 +366,119 @@
 
         <div id="email_resume_background">
             <h1>Test</h1>
+        </div>
+
+        <!-- This is the modal that appears when an employment card is clicked on -->
+        <div id="more_info_background">
+            <div id="more_info_card">
+                <div id="more_info_card_header">
+                    <img draggable="false" id="more_info_header_icon" src="../resources/images/info_logo.png" width="50" />
+                    <h1>More Info - ManagedWay</h1>
+                    <img draggable="false" id="more_info_header_close" src="../resources/images/white_close_x.png" width="27" />
+                    <img draggable="false" id="more_info_header_close_overlay" src="../resources/images/orange_close_x.png" width="27" />
+                </div>
+                <div id="more_info_view_select_container">
+                    <div class="more_info_view_button more_info_active_view_button" id="more_info_contact_button">
+                        <h2>Contact Info</h2>
+                        <div class="more_info_view_button_header"></div>
+                        <div class="more_info_view_button_header_overlay" style="width: 100%;"></div>
+                    </div>
+                    <div class="more_info_view_button" id="more_info_projects_button">
+                        <h2>All Projects</h2>
+                        <div class="more_info_view_button_header"></div>
+                        <div class="more_info_view_button_header_overlay"></div>
+                    </div>
+                </div>
+                <div id="more_info_contact_view_container">
+                    <table class="more_info_contact_table" id="more_info_building_contact_table">      
+                        <tr>
+                            <th>Main Phone</th>
+                            <th>Address</th>
+                            <!-- <th>Manager's Name</th>
+                            <th>Manager's Email</th>
+                            <th>Manager's Phone</th> -->
+                        </tr>
+                        <tr>
+                            <td>(888) 745-6948</td>
+                            <td>600 Executive Dr, Troy, MI 48083</td>
+                            <!-- <td>Chris Eckelsdafer</td>
+                            <td>ceckelsd@managedway.com</td>
+                            <td>(888) 745-6948 x225 fdjak;fdajskf;dsajkfd;asjfkdas;</td> -->
+                        </tr>
+                    </table>
+
+                    <table class="more_info_contact_table" id="more_info_boss_contact_table">      
+                        <tr>
+                            <th>Manager's Name</th>
+                            <th>Manager's Email</th>
+                            <th>Manager's Phone</th>
+                        </tr>
+                        <tr>
+                            <td>Chris Eckelsdafer</td>
+                            <td>ceckelsd@managedway.com</td>
+                            <td>(888) 745-6948 x225</td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="more_info_projects_view_container">
+                    <div id="more_info_projects_table">
+                        <h1>Project Name</h1>
+                        <h1>Project Description</h1>
+                        <h1>Languages/Skills Used</h1>
+                        <div class="more_info_projects_table_cell">
+                            <h2>ManagedDefender Dashboard</h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>
+                                Designed, created, and deployed a single pane of glass dashboard for our DDoS mitigation service customers. The application used JWT tokens as part of its rigorous authentication process. Additionally, it interacted with an ELK (Elasticsearch, Logstash, Kibana) cluster to pull data about how the service was working for them. A modern mobile-first UI and interactive graphs displayed the customer's data, and they also could print and download these reports as PDF files.
+                            </h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>HTML/CSS/JavaScript, jQuery, PHP, ELK Stack</h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>Service Qualification Software</h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>
+                                Designed, created, deployed, and supported a mobile-first web application that could store our partner carriers' serviceable addresses. The program could import Excel files ranging from 5 MB to 250+ MB in size. I wrote the file import module in C to ensure the fastest processing of files. The addresses were stored and sorted by partner carrier in a central database and then made searchable via a PHP (later updated to NodeJS) back-end.
+                            </h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>HTML/CSS/JavaScript, jQuery, PHP, C, SQLite, Apache</h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>Company Audit Software</h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>
+                                Designed, created, deployed, and supported a mobile-first single pane of glass application to store and make searchable all company info about customers, services, physical inventory, and more. The back-end used a relational MySQL database to store this data and the relationships between it.
+                            </h2>
+                        </div>
+                        <div class="more_info_projects_table_cell">
+                            <h2>HTML/CSS/JavaScript, jQuery, NodeJS, MySQL, Nginx</h2>
+                        </div>
+                        <!-- <h2>Chris Eckelsdafer</h2>
+                        <h2>ceckelsd@managedway.com</h2>
+                        <h2>(888) 745-6948 x225</h2>
+                        <h2>Chris Eckelsdafer</h2>
+                        <h2>ceckelsd@managedway.com</h2>
+                        <h2>(888) 745-6948 x225</h2> -->
+                    </div> 
+                    <!-- <table class="more_info_contact_table" id="more_info_projects_table">
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Project Description</th>
+                            <th>Languages Used</th>
+                        </tr>
+                        <tr>
+                            <td>Chris Eckelsdafer</td>
+                            <td>ceckelsd@managedway.com This is a test to see how this handles long scentences</td>
+                            <td>(888) 745-6948 x225</td>
+                        </tr>
+                    </table> -->
+                </div>
+            </div>
         </div>
 
         <!-- <div id="skill_cards_container">
