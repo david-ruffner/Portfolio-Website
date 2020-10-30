@@ -1,94 +1,16 @@
-@font-face {
-    /* Regular weight font */
-    font-family: roboto;
-    src: url('../../resources/fonts/Roboto-Regular.ttf');
-}
-
-@font-face {
-    /* Regular weight font */
-    font-family: bebas; 
-    src: url('../../resources/fonts/BebasNeue-Regular.ttf');
-}
-
-/* Custom color declarations */
-:root {
-    --web-orange:#ffa200;
-    --web-blue: #0d3b66;
-    --web-grey: #f5f5f5;
-    --web-moderate-grey: #ebebeb;
-    --web-dark-grey: #323230;
-    --web-dark-grey-seethrough: rgb(50, 50, 48, 0.9);
-}
-
 body {
-    padding: 0;
-    margin: 0;
-    width: 100vw;
-}
-
-/* BEGIN nav_container */
-#nav_container {
-    width: 100%;
-    background-color: #1f1f1f;
     display: grid;
-    grid-template-columns: 50% auto 3%;
-    /* margin-top: 15px; */
+    grid-template-columns: auto;
+    grid-template-rows: repeat(5, auto);
 }
-
-#nav_home_link {
-    grid-column: 1;
-    text-decoration: none;
-    color: white;
-    font-family: roboto;
-    font-size: 22pt;
-    text-align: center;
-    justify-self: left;
-    align-self: center;
-    margin-left: 30px;
-}
-
-#nav_home_link:hover {
-    color: var(--web-orange);
-}
-
-#nav_links {
-    grid-column: 2;
-    display: flex;
-    justify-content: space-between;
-}
-
-#nav_links > a {
-    font-family: roboto;
-    font-size: 22pt;
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.nav_link_active {
-    color: var(--web-orange);
-    text-decoration: none;
-}
-
-.nav_link_active:hover {
-    cursor: pointer;
-}
-
-.nav_link_inactive {
-    color: white;
-    text-decoration: none;
-}
-
-.nav_link_inactive:hover {
-    cursor: pointer;
-    color: var(--web-orange);
-}
-/* END nav_container */
 
 /* BEGIN resume_button_container */
 #resume_button_container {
     margin: auto;
     width: 100%;
+    grid-row: 2;
+    grid-column: 1;
+    z-index: 1;
     display: grid;
     grid-template-columns: auto max-content 5% max-content auto;
     grid-template-rows: repeat(2, max-content);
@@ -138,6 +60,9 @@ body {
 #contact_info_container {
     background-color: var(--web-grey);
     box-shadow: 2px 2px 3px #888;
+    grid-row: 3;
+    grid-column: 1;
+    z-index: 1;
     width: 100%;
     justify-self: center;
     display: grid;
@@ -190,12 +115,22 @@ body {
 }
 /* END contact_info_container */
 
+#resume_container {
+    grid-row: 5;
+    grid-column: 1;
+    width: 100%;
+    z-index: 1;
+}
+
 #resume_view_switch_container {
     width: 100%;
     display: grid;
     grid-template-columns: auto repeat(5, max-content) auto;
     grid-template-rows: repeat(2, max-content);
     margin-top: 50px;
+    grid-row: 4;
+    grid-column: 1;
+    z-index: 1;
 }
 
 .resume_switch_header {
@@ -203,6 +138,13 @@ body {
     text-align: center;
     font-family: roboto;
     font-size: 22pt;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.resume_switch_inactive_header:hover {
+    cursor: pointer;
+    color: var(--web-orange);
 }
 
 .resume_switch_active_header {
@@ -289,15 +231,14 @@ body {
     grid-row: 1;
 }
 
-
 #employment_cards_container {
     width: 100%;
     display: grid;
-    grid-template-columns: auto;
+    margin-bottom: 50px;
 }
 
 .employment_card {
-    width: max-content;
+    width: 1300px;
     background-color: var(--web-grey);
     box-shadow: 2px 3px 3px #888;
     justify-self: center;
@@ -312,7 +253,6 @@ body {
     border-radius: 50px;
     grid-column: 1;
     grid-row: 1 / -1;
-    margin-right: 25px;
     margin: 25px 25px 25px 25px;
 }
 
@@ -322,7 +262,6 @@ body {
     align-self: center;
     grid-column: 2;
     grid-row: 1;
-    /* margin: 40px 0 0 0; */
     padding: 0;
 }
 
@@ -347,7 +286,7 @@ body {
 .employment_card_description {
     font-family: roboto;
     font-size: 16pt;
-    width: 1000px;
+    max-width: 1000px;
 }
 
 /* BEGIN skill_cards_container */
@@ -582,7 +521,7 @@ progress {
 /* END skill_cards_container */
 
 /* BEGIN education_history_header_container */
-#education_history_header_container {
+/* #education_history_header_container {
     width: 100%;
     display: grid;
     grid-template-columns: auto;
@@ -607,74 +546,69 @@ progress {
     background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(14, 59, 101, 0.75), rgba(0, 0, 0, 0));
     margin-top: 25px;
     justify-self: center;
-}
+} */
 /* END education_history_header_container */
 
 /* BEGIN education_history_container */
-#education_history_container {
+#education_cards_container {
     width: 100%;
     display: grid;
     grid-template-columns: auto;
-    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .education_card {
     background-color: var(--web-moderate-grey);
-    width: 80%;
-    border-radius: 20px;
-    justify-self: right;
+    width: max-content;
     display: grid;
-    grid-template-columns: 40% 2px auto;
-    grid-template-rows: repeat(3, 1fr);
-    margin-bottom: 100px;
-    position: relative;
-    /* left: 20px; */
-    box-shadow: 2px 2px 3px #888;
-    left: 100vw;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: repeat(3, max-content) auto;
+    margin-top: 50px;
+    border-radius: 25px;
+    box-shadow: 2px 3px 3px #888;
+    justify-self: center;
+    padding: 25px;
+    width: 900px;
 }
 
 .education_card:hover {
     cursor: pointer;
 }
 
-.education_card > h1 {
-    font-family: bebas;
-    color: var(--web-blue);
-    font-size: 42pt;
-    grid-row: 1 / -1;
+.education_card > img {
     grid-column: 1;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    justify-self: center;
-    align-self: center;
-    position: relative;
-    z-index: 1;
+    grid-row: 1 / -1;
+    margin: 25px 25px 25px 25px;
 }
 
-.education_card > hr {
-    height: 80%;
-    grid-row: 1 / -1;
+.education_card > h1 {
+    font-family: roboto;
+    font-size: 24pt;
+    grid-row: 1;
     grid-column: 2;
-    border: none;
-    border-left: 2px solid var(--web-blue);
+    /* text-align: center;
+    justify-self: center; */
     align-self: center;
-    position: relative;
-    z-index: 1;
 }
 
 .education_card > h2 {
-    font-family: roboto;
-    color: var(--web-blue);
-    font-size: 26pt;
-    grid-column: 3;
+    font-family: roboto light;
+    font-size: 20pt;
+    grid-row: 2;
+    grid-column: 2;
     padding: 0;
     margin: 0;
-    text-align: center;
-    justify-self: center;
-    align-self: center;
-    position: relative;
-    z-index: 1;
+}
+
+.education_card > h3 {
+    font-family: roboto;
+    font-size: 18pt;
+    font-style: italic;
+    grid-row: 3;
+    grid-column: 2;
+    padding: 0;
+    margin: 0;
+    color: darkgrey;
 }
 
 .education_card > h2:nth-child(0) {
@@ -713,6 +647,12 @@ progress {
     font-family: bebas;
     font-size: 36pt;
     color: var(--web-orange);
+}
+
+.education_card_description {
+    font-family: roboto;
+    font-size: 16pt;
+    max-width: 1000px;
 }
 /* END education_history_container */
 
@@ -895,79 +835,6 @@ progress {
 }
 /* END resume_sort_container */
 
-/* BEGIN  employment_resume_container*/
-#employment_resume_container {
-    width: 80%;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    justify-items: center;
-}
-
-.employer_container {
-    background-color: white;
-    /* border: 2px solid var(--web-blue); */
-    box-shadow: 3px 3px 5px #888;
-    margin-top: 100px;
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: repeat(5, max-content);
-    position: relative;
-    left: 100vw;
-    opacity: 0;
-}
-
-.employer_container > h1 {
-    color: white;
-    font-family: bebas;
-    font-size: 36pt;
-    margin: 0;
-    padding-top: 15px;
-    padding-left: 25px;
-    padding-right: 25px;
-    text-align: center;
-    grid-row: 1;
-}
-
-.employer_container:nth-child(odd) > h1 {
-    background-color: var(--web-orange);
-}
-
-.employer_container:nth-child(even) > h1 {
-    background-color: var(--web-blue);
-}
-
-.employer_container > hr {
-    grid-row: 3;
-    border: none;
-    height: 2px;
-    width: 100%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(13, 59, 102, 0.75), rgba(255, 255, 255, 0));
-}
-
-.employer_container > p {
-    color: var(--web-blue);
-    font-family: roboto;
-    font-size: 30pt;
-    padding-left: 25px;
-    padding-right: 25px;
-    text-align: center;
-}
-
-.employer_container > button {
-    grid-row: 5;
-    font-family: roboto;
-    font-size: 30pt;
-    background-color: var(--web-blue);
-    color: white;
-    border: 1px solid var(--web-blue);
-    width: 50%;
-    justify-self: center;
-    border-radius: 20px;
-    margin-bottom: 50px;
-}
-/* END employment_resume_container */
-
 /* BEGIN education_resume_container */
 #education_resume_container {
     width: 80%;
@@ -994,8 +861,8 @@ progress {
 
 .education_container > h1 {
     color: white;
-    font-family: bebas;
-    font-size: 36pt;
+    font-family: roboto;
+    font-size: 18pt;
     margin: 0;
     padding-top: 35px;
     padding-left: 25px;
@@ -1027,4 +894,64 @@ progress {
     padding-left: 25px;
     padding-right: 25px;
     text-align: center;
+}
+
+#project_cards_container {
+    width: 100%;
+    display: grid;
+    margin-bottom: 50px;
+}
+
+.project_card {
+    width: 1300px;
+    background-color: var(--web-grey);
+    box-shadow: 2px 3px 3px #888;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(auto-fill, max-content);
+    margin-top: 50px;
+    border-radius: 25px;
+}
+
+.project_card > h1 {
+    font-family: roboto;
+    font-size: 26pt;
+    justify-self: center;
+    text-align: center;
+    margin: 25px 0 10px 0;
+    padding: 0;
+}
+
+.project_card > a {
+    font-family: roboto light;
+    font-size: 20pt;
+    justify-self: center;
+    text-align: center;
+    color: var(--web-blue);
+}
+
+.project_card > h2 {
+    font-family: roboto light;
+    font-size: 24pt;
+    justify-self: left;
+    margin: 25px 0 0 50px;
+    padding: 0;
+}
+
+.project_card > p, .project_card > ul > li {
+    font-family: roboto light;
+    font-size: 20pt;
+    justify-self: left;
+    margin: 25px 50px 50px 50px;
+    color: black;
+    padding: 0;
+    line-height: 40px;
+}
+
+#email_resume_background {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5);
 }

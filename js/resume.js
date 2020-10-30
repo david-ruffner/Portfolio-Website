@@ -296,24 +296,125 @@ function add_certificate_history(certificates) {
 // Global var to hold the resume API response
 var resp;
 
-// Keeps track of the current resume view (default is all)
-var current_resume_view_id = "all_resume_view_switch";
+// Keeps track of the current resume view switch (default is all)
+var current_resume_view_switch_id = $("#all_resume_view_switch");
+// Keeps track of the current resume view header (default is all)
+var current_resume_view_header_id = $("#all_resume_view_header");
 
 // When an inactive resume view switch button is clicked
 $(document).on("click", ".resume_inactive_switch", function() {
     // Remove the active class from the current active resume view switch
-    $(`#${current_resume_view_id}`).removeClass("resume_active_switch").addClass("resume_inactive_switch").children(".resume_switch_overlay").css("width", "0px");
-    // This will select the given old switch's corresponding header, and change its color
-    $(`#${current_resume_view_id.replace("switch", "header")}`).removeClass("resume_switch_active_header").addClass("resume_switch_inactive_header");
+    current_resume_view_switch_id.removeClass("resume_active_switch").addClass("resume_inactive_switch").children(".resume_switch_overlay").css("width", "0px");
+    // Remove the active class from the current active resume view header
+    current_resume_view_header_id.removeClass("resume_switch_active_header").addClass("resume_switch_inactive_header");
 
-    current_resume_view_id = $(this).attr("id");
-    // Select the given new switch's corresponding header, and change its color
-    $(`#${current_resume_view_id.replace("switch", "header")}`).removeClass("resume_switch_inactive_header").addClass("resume_switch_active_header");
+    // Set the new resume view switch and header
+    current_resume_view_switch_id = $(`#${$(this).attr("id")}`); 
+    current_resume_view_header_id = $(`#${$(this).attr("id").replace("switch", "header")}`);
+    
+    // Remove the inactive class, and add the active class to the new header
+    current_resume_view_header_id.removeClass("resume_switch_inactive_header").addClass("resume_switch_active_header");
     
     // Animation for the new active view switch
-    $(this).children(".resume_switch_overlay").animate({width: "150px"}, 250, function() {
-        $(this).parent().removeClass("resume_inactive_switch").addClass("resume_active_switch");
+    current_resume_view_switch_id.children(".resume_switch_overlay").animate({width: "150px"}, 250, function() {
+        current_resume_view_switch_id.removeClass("resume_inactive_switch").addClass("resume_active_switch");
     });
+
+    // Fade out the resume container
+    $("#resume_container").animate({opacity: 0}, 250, function() {
+        // Hide all of the resume sub-elements
+        $("#skill_cards_container").css("display", "none");
+        $("#employment_cards_container").css("display", "none");
+        $("#education_cards_container").css("display", "none");
+        $("#project_cards_container").css("display", "none");
+
+        // Reveal a specific sub-element based on the switch that was clicked
+        switch (current_resume_view_switch_id.attr("id")) {
+            case "all_resume_view_switch":
+                $("#skill_cards_container").css("display", "grid");
+                $("#employment_cards_container").css("display", "grid");
+                $("#education_cards_container").css("display", "grid");
+                $("#project_cards_container").css("display", "grid");
+                break;
+
+            case "skills_resume_view_switch":
+                $("#skill_cards_container").css("display", "grid");
+                break;
+            
+            case "employment_resume_view_switch":
+                $("#employment_cards_container").css("display", "grid");
+                break;
+
+            case "education_resume_view_switch":
+                $("#education_cards_container").css("display", "grid");
+                break;
+
+            case "projects_resume_view_switch":
+                $("#project_cards_container").css("display", "grid");
+                break;
+        }
+
+        // Fade back in the resume container
+        $("#resume_container").animate({opacity: 1}, 250);
+    })
+})
+
+// When an inactive resume switch header is clicked on, change to its corresponding view
+$(document).on("click", ".resume_switch_inactive_header", function() {
+    // Remove the active class from the current active resume view switch
+    current_resume_view_switch_id.removeClass("resume_active_switch").addClass("resume_inactive_switch").children(".resume_switch_overlay").css("width", "0px");
+    // Remove the active class from the current active resume view header
+    current_resume_view_header_id.removeClass("resume_switch_active_header").addClass("resume_switch_inactive_header");
+
+    // Set the new resume view switch and header
+    current_resume_view_header_id = $(`#${$(this).attr("id")}`); 
+    current_resume_view_switch_id = $(`#${$(this).attr("id").replace("header", "switch")}`);
+    
+    // Remove the inactive class, and add the active class to the new header
+    current_resume_view_header_id.removeClass("resume_switch_inactive_header").addClass("resume_switch_active_header");
+    
+    // Animation for the new active view switch
+    current_resume_view_switch_id.children(".resume_switch_overlay").animate({width: "150px"}, 250, function() {
+        current_resume_view_switch_id.removeClass("resume_inactive_switch").addClass("resume_active_switch");
+    });
+
+    // Fade out the resume container
+    $("#resume_container").animate({opacity: 0}, 250, function() {
+        // Hide all of the resume sub-elements
+        $("#skill_cards_container").css("display", "none");
+        $("#employment_cards_container").css("display", "none");
+        $("#education_cards_container").css("display", "none");
+        $("#project_cards_container").css("display", "none");
+
+        // Reveal a specific sub-element based on the switch that was clicked
+        switch (current_resume_view_switch_id.attr("id")) {
+            case "all_resume_view_switch":
+                $("#skill_cards_container").css("display", "grid");
+                $("#employment_cards_container").css("display", "grid");
+                $("#education_cards_container").css("display", "grid");
+                $("#project_cards_container").css("display", "grid");
+                break;
+
+            case "skills_resume_view_switch":
+                $("#skill_cards_container").css("display", "grid");
+                break;
+            
+            case "employment_resume_view_switch":
+                $("#employment_cards_container").css("display", "grid");
+                break;
+
+            case "education_resume_view_switch":
+                $("#education_cards_container").css("display", "grid");
+                break;
+
+            case "projects_resume_view_switch":
+                $("#project_cards_container").css("display", "grid");
+                break;
+        }
+
+        // Fade back in the resume container
+        $("#resume_container").animate({opacity: 1}, 250);
+    })
 })
 
 $(document).ready(function() {
@@ -327,95 +428,34 @@ $(document).ready(function() {
         $(this).animate({value: $(this).attr("skill-value")}, 250);
     })
 
-    // $(".card").each(function(index) {
-    //     $(this).delay(50 * index).animate({left: 0, opacity: 1}, 250);
-    // })
-    // get_employers();
+    // Grab the GET param from the current URL. Right now there can only be one param 'view', and it can only equal projects, so this will be pretty simple.
+    if (window.location.search.substr(1).split("=")[1] === "projects") {
+        // Remove the active class from the current active resume view switch
+        current_resume_view_switch_id.removeClass("resume_active_switch").addClass("resume_inactive_switch").children(".resume_switch_overlay").css("width", "0px");
+        // Remove the active class from the current active resume view header
+        current_resume_view_header_id.removeClass("resume_switch_active_header").addClass("resume_switch_inactive_header");
 
-    // $.ajax({
-    //     url: "https://api.davidr.pro/virtualresume/get",
-    //     success: function(response) {
-    //         resp = JSON.parse(response);
-    //         resp = resp.message;
+        current_resume_view_header_id = $("#projects_resume_view_header");
+        current_resume_view_switch_id = $("#projects_resume_view_switch");
 
-    //         // Add the contact info
-    //         var contact_info = resp.find((elem) => {
-    //             return elem.document_name == "contact_info"
-    //         })
-    //         add_contact_info(contact_info);
+        // Remove the inactive class, and add the active class to the new header
+        current_resume_view_header_id.removeClass("resume_switch_inactive_header").addClass("resume_switch_active_header");
+        
+        // Animation for the new active view switch
+        current_resume_view_switch_id.removeClass("resume_inactive_switch").addClass("resume_active_switch");
+        current_resume_view_switch_id.children(".resume_switch_overlay").css("width", "150px");
 
-    //         // Slide in the contact container background, and then fade in the elements
-    //         $("#contact_info_container").animate({right: 0}, 300, function() {
-    //             $(".contact_container").animate({opacity: 1}, 300);
-    //         })
+        // Make the project view the active view
+        $("#skill_cards_container").css("display", "none");
+        $("#employment_cards_container").css("display", "none");
+        $("#education_cards_container").css("display", "none");
+        $("#project_cards_container").css("display", "grid");
+    }
+})
 
-    //         // Add the language skills
-    //         var languages = resp.find((elem) => {
-    //             return elem.document_name == "languages";
-    //         }).languages;
-    //         add_language_skills(languages);
-
-    //         // Add the professional skills
-    //         var professional_skills = resp.find((elem) => {
-    //             return elem.document_name == "professional_skills";
-    //         }).skills;
-    //         add_professional_skills(professional_skills);
-
-    //         // Add the personal skills
-    //         var personal_skills = resp.find((elem) => {
-    //             return elem.document_name == "personal_skills";
-    //         }).skills;
-    //         add_personal_skills(personal_skills);
-
-    //         // Add the employment history
-    //         var employment_history = resp.find((elem) => {
-    //             return elem.document_name == "employment_history";
-    //         }).employers;
-    //         add_employment_history(employment_history);
-
-    //         // Add the education history
-    //         var education_history = resp.find((elem) => {
-    //             return elem.document_name == "education_history"
-    //         }).education;
-    //         add_education_history(education_history);
-
-    //         // Add the certification history
-    //         var certificate_history = resp.find((elem) => {
-    //             return elem.document_name == "certificate_history"
-    //         }).certificates;
-    //         add_certificate_history(certificate_history);
-
-    //         // Slide in the cards
-    //         $("#languages_card").animate({right: 0}, 300, function() {
-    //             // Animate the skill meters
-    //             $("#languages_card > .skill_meter > .skill_meter_foreground").each(function(index) {
-    //                 // Get the custom skill level property and ensure it's an int
-    //                 let skill_level = parseInt($(this).parent().attr("skill-level"));
-    //                 // skill_level *= 0.9;
-    //                 skill_level = skill_level + "%";
-    //                 console.log(skill_level);
-            
-    //                 $(this).delay(50 * index).animate({width: skill_level}, 500)
-    //             })
-    //         });
-
-    //         $("#professional_skills_card").animate({left: 0}, 300, function() {
-    //             // Animate the skill meters
-    //             $("#professional_skills_card > .skill_meter > .skill_meter_foreground").each(function(index) {
-    //                 // Get the custom skill level property and ensure it's an int
-    //                 let skill_level = parseInt($(this).parent().attr("skill-level"));
-    //                 // skill_level *= 0.9;
-    //                 skill_level = skill_level + "%";
-    //                 console.log(skill_level);
-            
-    //                 $(this).delay(50 * index).animate({width: skill_level}, 500)
-    //             })
-    //         });
-    //     },
-    //     error: function(error) {
-    //         //TODO: Handle this
-    //     }
-    // })
+// Download the resume when the "download resume" button is clicked
+$("#download_resume_button").click(function() {
+    window.open("https://davidr.pro/resources/David%20Ruffner%20Resume.pdf")
 })
 
 // When a skill progress bar is hovered over, show its corresponding tooltip
