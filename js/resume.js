@@ -301,6 +301,12 @@ var current_resume_view_switch_id = $("#all_resume_view_switch");
 // Keeps track of the current resume view header (default is all)
 var current_resume_view_header_id = $("#all_resume_view_header");
 
+// Determines if we're on a mobile device or not (based on screen width)
+var client_is_mobile = false;
+
+// Keeps track of the original height of the more info modal, to be used for max-height animations
+var more_info_original_height = 0;
+
 // When an inactive resume view switch button is clicked
 $(document).on("click", ".resume_inactive_switch", function() {
     // Remove the active class from the current active resume view switch
@@ -418,6 +424,30 @@ $(document).on("click", ".resume_switch_inactive_header", function() {
 })
 
 $(document).ready(function() {
+    // Determine if we're on mobile
+    client_is_mobile = ($(window).width() <= 1400);
+
+    // Fill in the employment cards based on the corresponding info in text_fillin.js
+    $(".employment_card").each(function() {
+        let employer_id = parseInt($(this).attr("employer_id"));
+        if (isNaN(employer_id)) {
+            $(this).children("ul").remove();
+            return $(this).children("h2").after(`<h1 style="justify-self: center; text-align: center; align-self: center;">Sorry, projects information for this employer couldn't be loaded.</h1>`);
+        }
+
+        let employer_projects = employer_objects.find(employer => employer.employer_id == employer_id).projects;
+        if (employer_projects == null || employer_projects == undefined || typeof(employer_projects) != "object" 
+        || employer_projects.length < 1) {
+            $(this).children("ul").remove();
+            return $(this).children("h2").after(`<h1 style="justify-self: center; text-align: center; align-self: center;">Sorry, projects information for this employer couldn't be loaded.</h1>`);
+        }
+
+        employer_projects.forEach(project => {
+            let project_html = `<li><p class="employment_card_description">${project.project_description}</p></li>`;
+            $(this).children("ul").append(project_html);
+        })
+    })
+
     // Fade in each contact container class
     $(".contact_container").each(function() {
         $(this).animate({opacity: 1}, 400);
@@ -640,8 +670,91 @@ $(window).on('scroll', function() {
     // certificate_history_container_inview();
 });
 
-function load_more_info_modal() {
-    
+// Changes the view in the more info modal
+// The animate param dictates whether or not we want to run the style animations
+// The resize_height param is used when we want to resize the card's height while going from contact to projects view and vice versa.
+function more_info_change_view(view, animate = true, resize_height = false) {
+    if (view === "projects") {
+        // Change the current active button to an inactive state
+        $("#more_info_contact_button > .more_info_view_button_header_overlay").css("width", "0");
+        $("#more_info_contact_button").removeClass("more_info_active_view_button");
+
+        // Change the clicked button to an active state
+        $("#more_info_projects_button").addClass("more_info_active_view_button");
+        
+        if (animate) {
+            $("#more_info_projects_button").children(".more_info_view_button_header_overlay").animate({width: "100%"}, 150);
+        }
+        else {
+            $("#more_info_projects_button").children(".more_info_view_button_header_overlay").css("width", "100%");
+        }
+
+        // Transition the corresponding view
+        if (animate) {
+            $("#more_info_contact_view_container").animate({left: "100%"}, 350);
+            $("#more_info_projects_view_container").animate({right: "5%"}, 350);
+        }
+        else {
+            $("#more_info_contact_view_container").css("left", "100%");
+            $("#more_info_projects_view_container").css("right", "5%");
+        }
+
+        /* If client is mobile the more info card's height must be changed to 75% when switching to projects view, so that we have a defined height for overflow-y.
+        Otherwise, we want to keep the height at max-content to make the modal look nice */
+        // if (client_is_mobile && resize_height) {
+        //     $("#more_info_card").animate({height: "75%"}, 200);
+        // }
+
+        if (!client_is_mobile) {
+            if (animate) {
+                // In the projects view mode, the parent more_info card needs to get a bit bigger if the screen width is greater than 1200px
+                $("#more_info_card").animate({width: '1300px', height: '80%'}, 350);
+            }
+            else {
+                $("#more_info_card").css("width", "1300px").css('height', '80%');
+            }
+        }
+    }
+    else {
+        // Change the current active button to an inactive state
+        $("#more_info_projects_button > .more_info_view_button_header_overlay").css("width", "0");
+        $("#more_info_projects_button").removeClass("more_info_active_view_button");
+
+        // Change the clicked button to an active state
+        $("#more_info_contact_button").addClass("more_info_active_view_button");
+        
+        if (animate) {
+            $("#more_info_contact_button").children(".more_info_view_button_header_overlay").animate({width: "100%"}, 150);
+        }
+        else {
+            $("#more_info_contact_button").children(".more_info_view_button_header_overlay").css("width", "100%");
+        }
+
+        if (animate) {
+            $("#more_info_contact_view_container").animate({left: 0}, 350);
+            $("#more_info_projects_view_container").animate({right: "100%"}, 350);
+        }
+        else {
+            $("#more_info_contact_view_container").css("left", 0);
+            $("#more_info_projects_view_container").css("right", "100%");
+        }
+
+        /* If client is mobile the more info card's height must be changed to 75% when switching to projects view, so that we have a defined height for overflow-y.
+        Otherwise, we want to keep the height at max-content to make the modal look nice */
+        // if (client_is_mobile && resize_height) {
+        //     $("#more_info_card").animate({height: more_info_original_height}, 200);
+        // }
+
+        if (!client_is_mobile) {
+            if (animate) {
+                // In the contact info view mode, the parent more_info card will become smaller
+                $("#more_info_card").animate({width: '1100px', height: '575px'}, 350);
+            }
+            else {
+                $("#more_info_card").css("width", "1100px").css('height', '575px');
+            }
+        }
+    }
 }
 
 // When a view button is clicked in the more info modal
@@ -651,50 +764,206 @@ $(".more_info_view_button").click(function() {
         return;
     }
 
-    // Change the current active button to an inactive state
-    $(".more_info_active_view_button > .more_info_view_button_header_overlay").css("width", "0");
-    $(".more_info_active_view_button").removeClass("more_info_active_view_button");
-
-    // Change the clicked button to an active state
-    $(this).addClass("more_info_active_view_button");
-    $(this).children(".more_info_view_button_header_overlay").animate({width: "100%"}, 150);
-
-    // Transition the corresponding view
-    // Get the id of the button's corresponding view
-    let view_id = $(this).attr("id").replace(/button/gi, "view_container");
-    if (view_id === "more_info_projects_view_container") {
-        $("#more_info_contact_view_container").animate({right: "100vw"}, 350);
-        $("#more_info_projects_view_container").animate({left: 0}, 350);
-
-        // In the projects view mode, the parent more_info card needs to get a bit bigger
-        let parent_card = $(this).parent().parent();
-        parent_card.animate({
-            width: '1200px',
-            height: '80%'}, 350);
+    if ($(this).attr("id") === "more_info_contact_button") {
+        more_info_change_view("contact", true, true);
     }
     else {
-        $("#more_info_projects_view_container").animate({left: "100vw"}, 350);
-        $("#more_info_contact_view_container").animate({right: 0}, 350);
-
-        // In the contact info view mode, the parent more_info card will become smaller
-        let parent_card = $(this).parent().parent();
-        parent_card.animate({
-            width: '1000px',
-            height: '525px'}, 350);
+        more_info_change_view("projects", true, true);
     }
 })
+
+// Opens or closes the more info screen with the action param = "close" or "open"
+function more_info_toggle(action) {
+    if (action === "close") {
+        $("#more_info_background").animate({opacity: 0}, 250, function() {
+            $("#more_info_background").css("display", "none");
+            $("#more_info_card").css("bottom", "100vh");
+        })
+    }
+    else {
+        $("#more_info_background").css("display", "grid").animate({opacity: 1}, 250);
+        $("#more_info_card").animate({bottom: 0}, 250, function() {
+            more_info_original_height = $("#more_info_card").height();
+            console.log(more_info_original_height);
+        });
+    }
+}
 
 // When the more info close button is clicked, close the modal
 $("#more_info_header_close_overlay").click(function() {
-    $("#more_info_background").animate({opacity: 0}, 250, function() {
-        $("#more_info_background").css("display", "none");
-        $("#more_info_card").css("bottom", "100vh");
+    more_info_toggle("close");
+})
+
+// When an employment card is clicked (this happens on mobile)
+$(".employment_card").click(function() {
+    let contact_table = $('#more_info_contact_table');
+    let projects_table = $('#more_info_projects_table');
+
+    // Prepare the more info modal with info from ./text_fillin.js based on the clicked card's employer_id attribute
+    let employer_id = parseInt($(this).attr("employer_id"));
+    if (isNaN(employer_id)) {
+        $(this).children("ul").remove();
+        return $(this).children("h2").after(`<h1 style="justify-self: center; text-align: center; align-self: center;">Sorry, projects information for this employer couldn't be loaded.</h1>`);
+    }
+
+    let employer_object = employer_objects.find(employer => employer.employer_id == employer_id);
+    let contact_info = employer_object.contact_info;
+    let projects = employer_object.projects;
+
+    // Set the employer contact info in the contact table
+    contact_table.children(".more_info_contact_row").children(".more_info_contact_data:eq(0)").text(contact_info.main_phone);
+    contact_table.children(".more_info_contact_row").children(".more_info_contact_data:eq(1)").text(contact_info.address);
+    contact_table.children(".more_info_contact_row").children(".more_info_contact_data:eq(2)").text(contact_info.manager_name);
+    contact_table.children(".more_info_contact_row").children(".more_info_contact_data:eq(3)").text(contact_info.manager_email);
+    contact_table.children(".more_info_contact_row").children(".more_info_contact_data:eq(4)").text(contact_info.manager_phone);
+
+    // Set the employer project info in the projects table
+    projects_table.children(".more_info_projects_table_cell").remove();
+    projects.forEach(project => {
+        let project_html = `
+        <div class="more_info_projects_table_cell">
+            <h2>${project.project_name}</h2>
+        </div>
+        <div class="more_info_projects_table_cell">
+            <h2>${project.project_description}</h2>
+        </div>
+        <div class="more_info_projects_table_cell">
+            <h2>${project.languages_used}</h2>
+        </div>`
+
+        // Append beneath the table's headers
+        projects_table.children("h1").last().after(project_html);
+    })
+
+    // Reset the card to be on the contact info view
+    more_info_change_view("contact", false);
+
+    // Fade in the modal
+    more_info_toggle("open");
+})
+// When an employment card overlay is clicked, show the more info modal with the appropriate info
+$(".employment_card_overlay").click(function() {
+    // If we're on desktop, we're concerned with a different container than we are if we're on mobile
+    if (client_is_mobile) {
+        let contact_table = $('#more_info_contact_table');
+        let projects_table = $('#more_info_projects_table');
+
+        // Prepare the more info modal with info from ./text_fillin.js based on the clicked card's employer_id attribute
+        let employer_id = parseInt($(this).parent().attr("employer_id"));
+        if (isNaN(employer_id)) {
+            $(this).children("ul").remove();
+            return $(this).children("h2").after(`<h1 style="justify-self: center; text-align: center; align-self: center;">Sorry, projects information for this employer couldn't be loaded.</h1>`);
+        }
+
+        let employer_object = employer_objects.find(employer => employer.employer_id == employer_id);
+        let contact_info = employer_object.contact_info;
+        let projects = employer_object.projects;
+
+        // Set the employer contact info in the contact table
+        contact_table.children(".more_info_contact_row").children(".more_info_contact_data:eq(0)").text(contact_info.main_phone);
+        contact_table.children(".more_info_contact_row").children(".more_info_contact_data:eq(1)").text(contact_info.address);
+        contact_table.children(".more_info_contact_row").children(".more_info_contact_data:eq(2)").text(contact_info.manager_name);
+        contact_table.children(".more_info_contact_row").children(".more_info_contact_data:eq(3)").text(contact_info.manager_email);
+        contact_table.children(".more_info_contact_row").children(".more_info_contact_data:eq(4)").text(contact_info.manager_phone);
+
+        // Set the employer project info in the projects table
+        projects_table.children(".more_info_projects_table_cell").remove();
+        projects.forEach(project => {
+            let project_html = `
+            <div class="more_info_projects_table_cell">
+                <h2>${project.project_name}</h2>
+            </div>
+            <div class="more_info_projects_table_cell">
+                <h2>${project.project_description}</h2>
+            </div>
+            <div class="more_info_projects_table_cell">
+                <h2>${project.languages_used}</h2>
+            </div>`
+
+            // Append beneath the table's headers
+            projects_table.children("h1").last().after(project_html);
+        })
+    }
+    else {
+        let contact_table = $('#more_info_contact_table_mobile');
+        let projects_table = $('#more_info_projects_table_mobile');
+
+        // Prepare the more info modal with info from ./text_fillin.js based on the clicked card's employer_id attribute
+        let employer_id = parseInt($(this).parent().attr("employer_id"));
+
+        let employer_object = employer_objects.find(employer => employer.employer_id == employer_id);
+        let contact_info = employer_object.contact_info;
+        let projects = employer_object.projects;
+
+        // Set the employer contact info in the contact table
+        contact_table.children(".more_info_contact_row_mobile").children(".more_info_contact_data:eq(0)").text(contact_info.main_phone);
+        contact_table.children(".more_info_contact_row_mobile").children(".more_info_contact_data:eq(1)").text(contact_info.address);
+        contact_table.children(".more_info_contact_row_mobile").children(".more_info_contact_data:eq(2)").text(contact_info.manager_name);
+        contact_table.children(".more_info_contact_row_mobile").children(".more_info_contact_data:eq(3)").text(contact_info.manager_email);
+        contact_table.children(".more_info_contact_row_mobile").children(".more_info_contact_data:eq(4)").text(contact_info.manager_phone);
+
+        // Set the employer project info in the projects table
+        projects_table.children(".mobile_projects_table_row").remove();
+        projects.forEach(project => {
+            let project_html = `
+            <div class="mobile_projects_table_row">
+                <h1>Project Name</h1>
+                <h2>${project.project_name}</h2>
+                <h1>Project Description</h1>
+                <h2>${project.project_description}</h2>
+                <h1>Languages/Skills Used</h1>
+                <h2>${project.languages_used}</h2>
+            </div>`
+
+            // Append to the mobile projects table
+            projects_table.append(project_html);
+        })
+    }
+
+    // Reset the card to be on the contact info view
+    more_info_change_view("contact", false);
+
+    // Fade in the modal
+    more_info_toggle("open");
+})
+
+// When the more info card is swiped right on change to the projects view if contacts is the active view
+$("#more_info_card").swiperight(function() {
+    // Only allow if we're on mobile
+    if (client_is_mobile) {
+        if ($(".more_info_active_view_button").attr("id") === "more_info_contact_button") {
+            more_info_change_view("projects", true, true);
+        }
+    }
+})
+
+// When the more info card is swiped left on
+$("#more_info_card").swipeleft(function() {
+    if (client_is_mobile) {
+        if ($(".more_info_active_view_button").attr("id") === "more_info_projects_button") {
+            more_info_change_view("contact", true, true);
+        }
+    }
+})
+
+// If the more info background is clicked on, fade it out (clicking out of the more info card)
+$("#more_info_background").click(function() {
+    $(this).animate({opacity: 0}, 250, function() {
+        $(this).css("display", "none");
     })
 })
 
-// When an employment card overlay is clicked, show the more info modal with the appropriate info
-$(".employment_card_overlay").click(function() {
-    // Fade in the modal
-    $("#more_info_background").css("display", "grid").animate({opacity: 1}, 250);
-    $("#more_info_card").animate({bottom: 0}, 250);
+// Prevents the more info background from fading out when the more info card or its children are clicked
+$("#more_info_card").click(e => {
+    e.preventDefault();
+    e.stopPropagation();
+})
+
+// If the escape key is pressed while the more info background is opened, fade it out
+$(document).keyup(e => {
+    if (e.key === "Escape") {
+        if ($("#more_info_background").is(":visible")) {
+            more_info_toggle("close");
+        }
+    }
 })
